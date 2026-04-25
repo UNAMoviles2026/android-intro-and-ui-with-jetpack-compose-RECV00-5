@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -190,6 +191,31 @@ private fun AppBottomBar() {
             label = { Text(text = "Profile") },
             colors = navigationBarItemColors()
         )
+
+        LazyColumn(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            items(classrooms) { classroom ->
+                ClassroomCard(classroom = classroom)
+            }
+        }
+    }
+}
+
+@Composable
+fun ClassroomCard(classroom: Classroom) {
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(text = classroom.name, style = MaterialTheme.typography.titleLarge)
+            Text(text = "Location: ${classroom.location}")
+            Text(text = "Capacity: ${classroom.capacity}")
+        }
     }
 }
 
